@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Source Premium Intro</title>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+
+<style>
+    #bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.5) blur(3px);
+}
+
+html, body { margin:0; padding:0; height:100%; overflow:hidden; font-family:sans-serif; }
+body { background:#000; }
+
+#intro { position:relative; width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; }
+
+#bg-video {
+  position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
+  z-index:0; filter: brightness(0.4) blur(2px);
+}
+
+#headline {
+  z-index:1; font-size:3rem; text-align:center; opacity:0;
+}
+
+#icons {
+  display:flex; gap:30px; margin-top:30px; z-index:1; opacity:0;
+}
+
+.icon {
+  width:50px; transform: translateY(0px);
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <video id="bg-video" autoplay muted loop>
+    <source src="background.mp4" type="video/mp4">
+  </video>
+  
+
+
+  <div id="headline">Learn. Contribute. Grow.</div>
+
+  <div id="icons">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="icon">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="icon">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="icon">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="icon">
+  </div>
+</div>
+
+<script>
+    gsap.from("#headline", { opacity: 0, y: -50, duration: 2, ease: "power3.out" });
+gsap.from("#icons", { opacity: 0, y: 50, duration: 2, delay: 1, ease: "power3.out" });
+
+
+gsap.to("#headline", {opacity:1, duration:2, y:-20, ease:"power3.out", delay:0.5});
+
+gsap.to("#icons", {opacity:1, duration:1.5, y:-10, ease:"back.out(1.7)", delay:2});
+
+
+gsap.to(".icon", {y:"+=10", repeat:-1, yoyo:true, duration:2, stagger:0.2, ease:"sine.inOut"});
+
+
+setTimeout(() => {
+  gsap.to("#intro", { opacity: 0, duration: 1, onComplete: () => {
+    window.location.href = "index.html"; // Replace with your actual tutorial page
+  }});
+}, 7000); // Adjust timing as needed
+
+</script>
+
+</body>
+</html>
